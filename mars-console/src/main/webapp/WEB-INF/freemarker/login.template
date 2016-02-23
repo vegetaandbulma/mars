@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<#include "/include/header.template"/>
+	</head>
+	<body style="background:#FFFFFF;">
+	</body>
+	<script data-main="${base.contextPath}/model/app/auth" src="${base.contextPath}/lib/require.js"></script>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<apps default="favsoft" patchFolder="d:/favsoft/patchFolder">
+		<app classlist="classlist.txt">
+			<projectPath>
+				E:\workspace\mobile-api-trunk\mobile-api,
+				E:\workspace\mobile\apiWeb,
+				E:\workspace\mobile\mobile
+			</projectPath>
+			<out_dir>E:\项目\上线准备\补丁包\out\</out_dir>
+		</app>
+	</apps>
+</config>

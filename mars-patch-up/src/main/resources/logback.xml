@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="1 minutes">
+	<appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<prudent>true</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>E:\项目\上线准备\补丁包\log\patch-%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>			
+		</rollingPolicy>
+		<encoder>
+			<!-- <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{50}[%line] - %msg%n</pattern> -->
+			<pattern>%d{HH:mm:ss.SSS} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<Encoding>UTF-8</Encoding>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{50}[%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="org.slf4j" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ROLLING" />
+	</logger>
+	
+	<logger name="com.opensymphony.xwork2" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ROLLING" />
+	</logger>
+	
+	<logger name="org.apache.velocity" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ROLLING" />
+	</logger>
+	
+	<logger name="org.apache.struts2" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ROLLING" />
+	</logger>
+
+	<logger name="org.springframework" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ROLLING" />
+	</logger>
+
+	<logger name="org.hibernate" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ROLLING" />
+	</logger>
+	
+	<logger name="com.dhgate" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ROLLING" />
+	</logger>
+	
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ROLLING" />
+	</root>
+</configuration>

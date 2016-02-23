@@ -1,0 +1,4 @@
+		<link rel="stylesheet" type="text/css" href="${base.contextPath}/lib/jquery.easy.ui/themes/bootstrap/easyui.css" id="appCss"/>
+		<link rel="stylesheet" type="text/css" href="${base.contextPath}/lib/jquery.easy.ui/themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="${base.contextPath}/lib/jquery.easy.ui/themes/color.css">
+		<link rel="stylesheet" type="text/css" href="${base.contextPath}/css/style.css" />

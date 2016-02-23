@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:context="http://www.springframework.org/schema/context"
+         xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+             http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">	
+	<!--host-->	
+	<bean id="mongoFactoryBean" class="org.springframework.data.mongodb.core.MongoFactoryBean">  
+		<property name="host" value="${mongodb.servers}"/>  
+	</bean>
+	<!--user and password-->	
+	<bean id="mongoUserCredentials" class="org.springframework.data.authentication.UserCredentials">
+		<constructor-arg name="username" value="${mongodb.username}" />
+		<constructor-arg name="password" value="${mongodb.password}" />
+	</bean>
+	<!--DB name-->	
+	<bean id="mongoDbFactory" class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
+		<constructor-arg ref="mongoFactoryBean" />
+		<constructor-arg name="databaseName" value="${mongodb.databaseName}" />
+		<constructor-arg name="credentials" ref="mongoUserCredentials" />
+	</bean>
+	
+	<bean id="mappingContext" class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
+	<!--去除Spring默认添加的 _class 字段-->
+	<bean id="defaultMongoTypeMapper" class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
+		<constructor-arg name="typeKey"><null/></constructor-arg>
+	</bean>
+	
+	<bean id="mappingMongoConverter" class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+		<constructor-arg name="mappingContext" ref="mappingContext" />
+		<property name="typeMapper" ref="defaultMongoTypeMapper" />
+	</bean>
+	
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+		<constructor-arg name="mongoConverter" ref="mappingMongoConverter" />
+	</bean> 
+	<context:component-scan base-package="com.nagao.db.nosql" />
+</beans>
