@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<#include "/include/header.template"/>
+	</head>
+	<body class="easyui-layout">
+		<div region="north" split="true" border="false" style="overflow: hidden;height:75px;">
+			<div class="top">
+				<div class="content">
+					欢迎您 ：<span id="username"></span> <a href="#" id="logout" >退出</a>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div region="west" split="true" title="管理菜单" style="width:280px;padding:1px;overflow:hidden;">
+			<div id="appNav" class="easyui-accordion" fit="true" border="false"></div>
+		</div>
+		<div region="center" style="overflow:hidden;">
+			<div class="easyui-tabs" fit="true" border="false" id="appTabs"></div>
+		</div>
+		<div region="south" split="true" style="height: 30px; background: #D2E0F2; ">
+			<div id="appInfo"></div>
+		</div>
+	</body>
+	<script data-main="${base.contextPath}/model/app/main" src="${base.contextPath}/lib/require.js"></script>
+	<#include "/include/footer.template"/>
+</html>

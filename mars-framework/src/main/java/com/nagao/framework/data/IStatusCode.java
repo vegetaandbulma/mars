@@ -1,10 +1,10 @@
-package com.nagao.mars.console.common.exception;
+package com.nagao.framework.data;
 /**
  * 
  * @author nadonghua
  *
  */
-public interface IException {
+public interface IStatusCode {
 
 	public String getState();
 	

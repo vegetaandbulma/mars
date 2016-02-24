@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title></title>
-		<#include "/include/header.template"/>
-	</head>
-	<body style="background:#FFFFFF;">
-	</body>
-	<script data-main="${base.contextPath}/model/app/auth" src="${base.contextPath}/lib/require.js"></script>
-</html>
+<div style="padding:10px 15px 10px 15px">
+	<table cellpadding="10">
+		<tr>
+			<td>账号:</td>
+			<td>
+				<input class="easyui-textbox" type="text" name="name" data-options="required:true"></input>
+			</td>
+		</tr>
+		<tr>
+			<td>密码:</td>
+			<td>
+				<input class="easyui-textbox" type="password" name="email" data-options="required:true"></input>
+			</td>
+		</tr>
+	</table>
+	<div class="space"></div>
+	<div class="space"></div>
+	<div style="text-align:center;padding:5px">
+		<a id="login_btn" href="javascript:void(0)" class="easyui-linkbutton c1" style="width:120px">确定</a>
+		<!--<a href="javascript:void(0)" class="easyui-linkbutton c5" style="width:60px">取消</a>-->
+	</div>
+</div>

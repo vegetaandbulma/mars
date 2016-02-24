@@ -17,7 +17,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nagao.framework.data.JsonResponse;
+import com.nagao.framework.data.GlobalStatusCode;
+import com.nagao.framework.data.NormResponse;
 
 /**
  * spring 拦截器 判断 用户是否登录，没有登录 跳转去登陆
@@ -31,46 +32,42 @@ public class SessionInterceptor implements HandlerInterceptor{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response, Object handler) throws Exception {
-		// 
 		//放过例外
 		log.debug(" Session Interceptor ==> " + request.getServletPath());
-		if(allows.contains(request.getServletPath())){
+		if(request.getServletPath().indexOf("login.json") <= 0){
+		//if(allows.contains(request.getServletPath()) && request.getServletPath().indexOf("login") <= 0){
 			return true;
 		}
 
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
-		
-		RequestMapping requestMapping = handlerMethod.getMethodAnnotation(RequestMapping.class);
+		//RequestMapping requestMapping = handlerMethod.getMethodAnnotation(RequestMapping.class);
 		ResponseBody responseBody = handlerMethod.getReturnType().getMethodAnnotation(ResponseBody.class);
-			
 		//User u = sessionManager.getUser(request);
-	
 		//无会话，跳转登陆页。
 //		if(u != null){
 //			return true;
 //		}
 		if(responseBody!=null){
 			log.debug(" Ajax ");
-//			ObjectMapper mapper = new ObjectMapper();
-//			String json = mapper.writeValueAsString(JsonResponse.format(false, "session timed out"));
-//			//设置状态码
-//			//response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-//			//设置ContentType
-//			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-//			//避免乱码
-//			response.setCharacterEncoding("UTF-8");
-//			response.setHeader("Cache-Control", "no-cache, must-revalidate");
-//			try {
-//			    response.getWriter().write(json);
-//			} catch (IOException e) {
-//			    // 
-//			    e.printStackTrace();
-//			}
-			return true;
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(NormResponse.format(GlobalStatusCode.SESSION_TIME_OUT));
+			//设置状态码
+			//response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			//设置ContentType
+			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+			//避免乱码
+			response.setCharacterEncoding("UTF-8");
+			response.setHeader("Cache-Control", "no-cache, must-revalidate");
+			try {
+				response.getWriter().write(json);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return false;
 		}else{
 			log.debug(" no Ajax ");
 			//request.getRequestDispatcher("/").forward(request, response);
-			return true;
+			return false;
 		}
 	}
 

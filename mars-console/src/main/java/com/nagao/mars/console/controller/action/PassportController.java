@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.nagao.framework.data.JsonResponse;
+import com.nagao.framework.data.NormResponse;
 import com.nagao.framework.data.NormCodeConst;
 import com.nagao.framework.data.Result;
 import com.nagao.mars.console.controller.BaseController;
@@ -30,21 +30,21 @@ public class PassportController extends BaseController  {
 	public @ResponseBody Map<String, Object> login(String username,String email,String password){
 		Result<User> r = passportService.login(username, email ,password, "");
 		//sessionManager.setUser(r.getObject(),this.response);
-		return JsonResponse.format(r.isSuccess(), r.getObject(), r.getMessage());
+		return NormResponse.format(r.isSuccess(), r.getObject(), r.getMessage());
 	}
 	
 	@RequestMapping("/logout")
 	public @ResponseBody Map<String, Object> logout(){
-		return JsonResponse.format(true, 0, null, "");
+		return NormResponse.format(true, 0, null, "");
 	}
 	
 	@RequestMapping("/register")
 	public @ResponseBody Map<String, Object> register(User userVo){
 		boolean r = passportService.register(userVo);
 		if(r){
-			return JsonResponse.format(r, null, MessageSourceUtil.getMessage(request, NormCodeConst.SUCCESS));
+			return NormResponse.format(r, null, MessageSourceUtil.getMessage(request, NormCodeConst.SUCCESS));
 		} else {
-			return JsonResponse.format(r, null, MessageSourceUtil.getMessage(request, NormCodeConst.FAIL));
+			return NormResponse.format(r, null, MessageSourceUtil.getMessage(request, NormCodeConst.FAIL));
 		}
 	}
 }

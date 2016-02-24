@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.nagao.framework.data.JsonResponse;
+import com.nagao.framework.data.NormResponse;
 import com.nagao.framework.data.NormCodeConst;
 import com.nagao.framework.data.Paged;
 import com.nagao.mars.console.controller.BaseController;
@@ -31,9 +31,9 @@ public class CategoryController extends BaseController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		boolean r = categoryService.addNode(category);
 		if(r){
-			return JsonResponse.format(r, map, MessageSourceUtil.getMessage(request, NormCodeConst.SUCCESS));
+			return NormResponse.format(r, map, MessageSourceUtil.getMessage(request, NormCodeConst.SUCCESS));
 		} else {
-			return JsonResponse.format(r, map, MessageSourceUtil.getMessage(request, NormCodeConst.FAIL));
+			return NormResponse.format(r, map, MessageSourceUtil.getMessage(request, NormCodeConst.FAIL));
 		}
 	}	
 	
@@ -46,7 +46,7 @@ public class CategoryController extends BaseController {
 	@RequestMapping("/get")
 	public @ResponseBody Map<String, Object> get(String id){
 		Category category = categoryService.getNode(id);
-		return JsonResponse.format(true, category, "ok");
+		return NormResponse.format(true, category, "ok");
 	}
 	
 	@RequestMapping("/modify")
@@ -54,9 +54,9 @@ public class CategoryController extends BaseController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		boolean r = categoryService.modifyNode(category);
 		if(r){
-			return JsonResponse.format(r, map, "ok");
+			return NormResponse.format(r, map, "ok");
 		} else {
-			return JsonResponse.format(r, map, "fail");
+			return NormResponse.format(r, map, "fail");
 		}
 	}
 	
@@ -65,9 +65,9 @@ public class CategoryController extends BaseController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		boolean r = categoryService.deleteNode(id);
 		if(r){
-			return JsonResponse.format(r, map, "ok");
+			return NormResponse.format(r, map, "ok");
 		} else {
-			return JsonResponse.format(r, map, "fail");
+			return NormResponse.format(r, map, "fail");
 		}	
 	}
 	
@@ -76,9 +76,9 @@ public class CategoryController extends BaseController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		boolean r = categoryService.hideNode(id);
 		if(r){
-			return JsonResponse.format(r, map, "ok");
+			return NormResponse.format(r, map, "ok");
 		} else {
-			return JsonResponse.format(r, map, "fail");
+			return NormResponse.format(r, map, "fail");
 		}		
 	}
 }

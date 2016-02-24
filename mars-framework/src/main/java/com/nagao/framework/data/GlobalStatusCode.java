@@ -1,25 +1,24 @@
-package com.nagao.mars.console.common.exception;
+package com.nagao.framework.data;
 /**
  * 
  * @author nadonghua
  *
  */
-public enum GlobalExcpCode implements IException {
+public enum GlobalStatusCode implements IStatusCode {
 
-	SUCCESS("0x0000", "state.success"),//成功
-	
-	FAILURE("0x0001", "state.failure");	
+	SUCCESS("0x0000", "state.success"),//成功	
+	FAILURE("0x0001", "state.failure"),
+	SESSION_TIME_OUT("0x0002", "state.session.time.out");
 	/**
 	 * 状态码
 	 */
 	private String state;
-	
 	/**
 	 * 对应的key
 	 */
 	private String key;
 	
-	private GlobalExcpCode(String state, String key) {
+	private GlobalStatusCode(String state, String key) {
 		this.state = state;
 		this.key = key;
 	}

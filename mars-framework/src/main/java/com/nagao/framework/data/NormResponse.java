@@ -9,10 +9,21 @@ import java.util.Map;
  * @author NaOH
  *
  */
-public class JsonResponse {
+public class NormResponse {
 	
-	public static Map<String, Object> format(){
-		return null;
+	public static Map<String, Object> format(IStatusCode iStatusCode){
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put(AjaxConst.STATUS, iStatusCode.getState());
+		result.put(AjaxConst.MESSAGE, iStatusCode.getKey());
+		return result;
+	}
+	
+	public static Map<String, Object> format(IStatusCode iStatusCode,Object o){
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put(AjaxConst.STATUS, iStatusCode.getState());
+		result.put(AjaxConst.MESSAGE, iStatusCode.getKey());
+		result.put(AjaxConst.DATA, o);
+		return result;
 	}
 	
 	public static Map<String, Object> format(boolean isSuccess,String msg){
@@ -44,7 +55,7 @@ public class JsonResponse {
 		Map<String, Object> result = new HashMap<String, Object>();
 		if(isSuccess){
 			result.put(AjaxConst.STATUS, AjaxConst.SUCCESS);
-			result.put(AjaxConst.TOTAL,total);			
+			result.put(AjaxConst.TOTAL,total);
 			result.put(AjaxConst.ROWS, rows);
 			result.put(AjaxConst.MESSAGE, msg);
 		}else{

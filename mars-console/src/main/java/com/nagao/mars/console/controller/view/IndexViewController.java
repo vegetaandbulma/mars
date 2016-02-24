@@ -11,6 +11,11 @@ public class IndexViewController {
 	public String index() {
 		return "index";
 	}
+	
+	@RequestMapping("/main")
+	public String main() {
+		return "main";
+	}
 
 	@RequestMapping("/login")
 	public String desktop() {
